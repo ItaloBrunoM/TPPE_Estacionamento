@@ -1,10 +1,6 @@
-name: CI Pipeline Segura
+name: CI Pipeline
 
 on: [push]
-
-env:
-  DB_HOST: localhost
-  DB_PORT: 5432
 
 jobs:
   test-backend:
@@ -14,56 +10,36 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_USER: ${{ secrets.DB_USER }}      
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }} 
-          POSTGRES_DB: ${{ secrets.DB_NAME }} 
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
         ports:
           - 5432:5432
-        options: --health-cmd pg_isready -U ${{ secrets.DB_USER }} -d ${{ secrets.DB_NAME }} --health-interval 10s --health-timeout 5s --health-retries 5
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
       
-      - name: Configurar Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
       
-      - name: Instalar dependências
+      - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install -r backend/requirements.txt pytest pytest-cov
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install pytest  # Garante que o pytest está instalado
+      
+      - name: Wait for PostgreSQL
+        run: sleep 5  
 
-      - name: Validar conexão com PostgreSQL
+      - name: Run tests
         env:
-          PGUSER: ${{ secrets.DB_USER }}
-          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
-          PGDATABASE: ${{ secrets.DB_NAME }}
-        run: |
-          echo "🔄 Testando conexão com PostgreSQL..."
-          if ! pg_isready -U "$PGUSER" -d "$PGDATABASE" -h localhost -t 2; then
-            echo "❌ Falha na conexão com PostgreSQL"
-            exit 1
-          fi
-          echo "✅ PostgreSQL conectado com sucesso!"
-
-      - name: Executar testes
-        env:
+          DB_HOST: localhost
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DEBUG: ${{ secrets.DEBUG }}
         run: |
-          pytest backend/tests/ -v --cov=backend --cov-report=xml --junitxml=test-results.xml
-          
-      - name: Upload Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} 
-          file: ./coverage.xml
-
-      - name: Upload resultados de testes
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: |
-            test-results.xml
-            coverage.xml
+          pytest backend/tests/ -v  # -v para output detalhado
