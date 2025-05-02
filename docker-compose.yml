@@ -33,6 +33,17 @@ services:
     networks:
       - backend_network
 
+  frontend:
+      build: ./frontend
+      ports:
+        - "3000:80" 
+      env_file:
+        - ./frontend/.env.production
+      depends_on:
+        - backend
+      networks:
+        - backend_network
+
 volumes:
   pg_data:
 
