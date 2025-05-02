@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: estacionamento_db
+    env_file: .env  
+    environment:
+      POSTGRES_USER: ${DB_USER}   
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./backend/sql_scripts:/docker-entrypoint-initdb.d
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${DB_USER} -d $${DB_NAME}"]     
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:  
+    build: ./backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - backend_network
+
+volumes:
+  pg_data:
+
+networks:
+  backend_network:
+    driver: bridge
