@@ -1,12 +1,9 @@
 from fastapi import FastAPI
-from sqlalchemy import create_engine
+from src.routes.carros import router as carros_router
 
-app = FastAPI()
-
-# Conexão com o PostgreSQL
-DATABASE_URL = "postgresql://estacionamento:senha_segura@db:5432/estacionamento_db"
-engine = create_engine(DATABASE_URL)
+app= FastAPI()
+app.include_router(carros_router, prefix="/api")
 
 @app.get("/")
 def read_root():
-    return {"Salve salve"}
+    return{"message": "Sistema de Estacionamento"}
