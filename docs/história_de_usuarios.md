@@ -15,3 +15,4 @@
 | Mensalista | US11 | Como operador, quero cadastrar um acesso como mensalista para reconhecer veículos com pagamento mensal.|
 | Evento | US12 | Como operador, quero cadastrar um evento com nome e valor fixo para cobrar acessos de forma diferenciada.|
 | Faturamento | US13 | Como administrador, quero visualizar o total de ganhos de um estacionamento para acompanhar o faturamento.|
+| Faturamento | US14 | Como administrador, quero visualizar gráficos com dados de faturamento por tipo de acesso e período para analisar o desempenho dos estacionamentos. |
