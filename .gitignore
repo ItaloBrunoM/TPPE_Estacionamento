@@ -24,6 +24,9 @@ node_modules/
 .pnp
 .pnp.js
 dist/
+.dbeaver/
+.dbeaver-data-sources.json
+.project
 .coverage 
 .temp/
 .cache/
