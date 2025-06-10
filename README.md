@@ -14,6 +14,13 @@ Sistema de gerenciamento de estacionamento com API em FastAPI, banco de dados Po
 <img src='docs/assets/Diagrama de Classe.jpg'></img>
 </div>
 
+## Diagrama Fisico do banco de dados
+
+<div align='center'>
+<p>Diagrama UML de Classes:</p>
+<img src='docs/assets/DiagramaFisico.png'></img>
+</div>
+
 ## Requisitos
 
 - [Docker](https://www.docker.com/)

@@ -1,4 +1,3 @@
-
 INSERT INTO pessoa (nome, cpf, email)
 VALUES ('Administrador do Sistema', '000.000.000-00', 'admin@estacionamento.com')
 ON CONFLICT (cpf) DO NOTHING;
