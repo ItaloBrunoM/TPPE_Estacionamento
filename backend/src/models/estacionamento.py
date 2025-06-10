@@ -1,7 +1,7 @@
+from typing import Optional
 from sqlalchemy import Column, Integer, String, Numeric
 from sqlalchemy.orm import declarative_base
 from pydantic import BaseModel, ConfigDict
-from typing import Optional
 
 Base = declarative_base()
 

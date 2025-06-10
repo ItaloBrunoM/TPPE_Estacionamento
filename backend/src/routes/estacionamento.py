@@ -1,13 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
-
+from fastapi import APIRouter, Depends, status
+from sqlalchemy.orm import Session
 from ..database import get_db
 from ..models import estacionamento as models
 
 router = APIRouter(
-    prefix="/api/estacionamentos", 
-    tags=["Estacionamentos"]      
+    prefix="/api/estacionamentos",
+    tags=["Estacionamentos"]
 )
 
 @router.post("/", response_model=models.Estacionamento, status_code=status.HTTP_201_CREATED)
