@@ -1,3 +1,4 @@
+// src/pages/EstacionamentoPage.tsx
 import { useState, useEffect } from "react";
 import api from "../components/api";
 import { EstacionamentoList } from "../components/EstacionamentoList";
@@ -52,6 +53,7 @@ export function EstacionamentoPage() {
       <EstacionamentoList
         estacionamentos={estacionamentos}
         onAddClick={handleOpenModal}
+        onDeleteSuccess={fetchEstacionamentos}
       />
 
       {isModalOpen && (

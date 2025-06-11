@@ -1,17 +1,51 @@
+import { useState } from 'react';
 import { EstacionamentoType } from "../pages/EstacionamentoPage";
-import "./EstacionamentoList.css"; 
+import "./EstacionamentoList.css";
+import { ConfirmModal } from './ConfirmModal'; // Importar o ConfirmModal
+import api from '../components/api'; // Importar a instância da API
 
 interface EstacionamentoListProps {
   estacionamentos: EstacionamentoType[];
   onAddClick: () => void;
+  onDeleteSuccess: () => void; // Adicionar prop para recarregar a lista
 }
 
 export function EstacionamentoList({
   estacionamentos,
   onAddClick,
+  onDeleteSuccess,
 }: EstacionamentoListProps) {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [estacionamentoToDeleteId, setEstacionamentoToDeleteId] = useState<number | null>(null);
+
+  const handleDeleteClick = (id: number) => {
+    setEstacionamentoToDeleteId(id);
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (estacionamentoToDeleteId !== null) {
+      try {
+        await api.delete(`/estacionamentos/${estacionamentoToDeleteId}/`);
+        alert('Estacionamento deletado com sucesso!');
+        onDeleteSuccess();
+      } catch (error) {
+        console.error('Erro ao deletar estacionamento:', error);
+        alert('Erro ao deletar estacionamento. Tente novamente.');
+      } finally {
+        setShowConfirmModal(false);
+        setEstacionamentoToDeleteId(null);
+      }
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirmModal(false);
+    setEstacionamentoToDeleteId(null);
+  };
+
   return (
-    <> 
+    <>
       <div
         className="header-actions"
         style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}
@@ -34,11 +68,19 @@ export function EstacionamentoList({
             <span className="item-name">{est.nome}</span>
             <div className="item-actions">
               <button className="icon-btn">✏️</button>
-              <button className="icon-btn">🗑️</button>
+              <button className="icon-btn" onClick={() => handleDeleteClick(est.id)}>🗑️</button>
             </div>
           </div>
         ))}
       </div>
-    </> 
+
+      {showConfirmModal && (
+        <ConfirmModal
+          message={`Tem certeza que deseja deletar o estacionamento com ID ${estacionamentoToDeleteId}?`}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
+      )}
+    </>
   );
 }
