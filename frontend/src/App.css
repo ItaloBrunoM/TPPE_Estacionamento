@@ -1,16 +1,17 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   overflow: hidden;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #5375A7;
+  background-color: #5375a7;
 }
 
 .app-container {
@@ -28,7 +29,7 @@ body {
 .content-area {
   padding: 24px;
   flex-grow: 1;
-  background-color: #5375A7;
+  background-color: #5375a7;
   overflow-y: auto;
   padding-top: calc(60px + 24px);
   transition: margin-left 0.3s ease-in-out;

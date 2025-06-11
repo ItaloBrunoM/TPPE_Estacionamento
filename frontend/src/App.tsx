@@ -1,9 +1,14 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { Sidebar } from './components/sidebar';
-import { TopBar } from './components/topbar';
-import { EstacionamentoPage } from './pages/EstacionamentoPage';
-import './App.css';
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { Sidebar } from "./components/sidebar";
+import { TopBar } from "./components/topbar";
+import { EstacionamentoPage } from "./pages/EstacionamentoPage";
+import "./App.css";
 
 function DashboardPage() {
   return <div>Bem-vindo à Visão Geral!</div>;
@@ -19,34 +24,36 @@ function PageLayout() {
   };
 
   switch (location.pathname) {
-    case '/estacionamentos':
+    case "/estacionamentos":
       currentPageTitle = "Estacionamento";
       break;
-    case '/':
+    case "/":
       currentPageTitle = "Visão Geral";
       break;
     default:
       currentPageTitle = "Página Não Encontrada";
       break;
   }
-  
+
   const loggedUser = {
     name: "Italo Bruno",
-    role: "Administrador"
+    role: "Administrador",
   };
 
   return (
-    <div className="app-container"> 
+    <div className="app-container">
       <TopBar title={currentPageTitle} onMenuClick={toggleSidebar} />
-      
+
       <div className="content-wrapper">
-        <Sidebar 
-          userName={loggedUser.name} 
-          userRole={loggedUser.role} 
-          isVisible={isSidebarVisible} 
+        <Sidebar
+          userName={loggedUser.name}
+          userRole={loggedUser.role}
+          isVisible={isSidebarVisible}
         />
-        <main className={`content-area ${isSidebarVisible ? 'content-area-shifted' : ''}`}> 
-        <Routes>
+        <main
+          className={`content-area ${isSidebarVisible ? "content-area-shifted" : ""}`}
+        >
+          <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/estacionamentos" element={<EstacionamentoPage />} />
           </Routes>
