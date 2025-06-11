@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .database import engine
 from .models import estacionamento as estacionamento_model
 from .routes import estacionamento as estacionamento_routes
@@ -16,6 +17,18 @@ app = FastAPI(
     description="API para o sistema de gerenciamento de estacionamentos TPPE.",
     version="1.0.0",
     lifespan=lifespan
+)
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(estacionamento_routes.router)
