@@ -1,24 +1,29 @@
-/* app.css */
-
-/* Estilo para inputs e botões */
-input, button {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #5375A7;
 }
 
-button {
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
+.app-layout {
+  display: flex;
 }
 
-button:hover {
-  background-color: #45a049;
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-/* Estilos para as mensagens de erro e sucesso */
+.content-area {
+  padding: 24px;
+  flex-grow: 1;
+  background-color: #5375A7;
+}
+
 .mensagem {
   margin-top: 20px;
   padding: 10px;
@@ -26,13 +31,11 @@ button:hover {
   font-size: 16px;
 }
 
-/* Mensagem de sucesso (verde) */
 .mensagem-sucesso {
   background-color: #ddffdd;
   color: green;
 }
 
-/* Mensagem de erro (vermelha) */
 .mensagem-erro {
   background-color: #ffdddd;
   color: red;
