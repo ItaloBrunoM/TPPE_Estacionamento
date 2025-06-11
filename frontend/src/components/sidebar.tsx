@@ -17,11 +17,11 @@ export function Sidebar({ userName, userRole, isVisible }: SidebarProps) {
         <h3>ESTACIONAMENTO TOP</h3>
       </div>
       <div className="sidebar-links">
+      <NavLink to="/" end className={getLinkClass}>
+          VISÃO GERAL
+        </NavLink>
         <NavLink to="/estacionamentos" className={getLinkClass}>
           ESTACIONAMENTO
-        </NavLink>
-        <NavLink to="/" end className={getLinkClass}>
-          VISÃO GERAL
         </NavLink>
       </div>
       <div className="sidebar-footer">
