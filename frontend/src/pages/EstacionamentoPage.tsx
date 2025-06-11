@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import api from '../components/api';
-import { EstacionamentoList } from '../components/EstacionamentoList';
-import { EstacionamentoForm } from '../components/EstacionamentoForm';
+import { useState, useEffect } from "react";
+import api from "../components/api";
+import { EstacionamentoList } from "../components/EstacionamentoList";
+import { EstacionamentoForm } from "../components/EstacionamentoForm";
 
 export interface EstacionamentoType {
   id: number;
@@ -14,14 +14,16 @@ export interface EstacionamentoType {
 }
 
 export function EstacionamentoPage() {
-  const [estacionamentos, setEstacionamentos] = useState<EstacionamentoType[]>([]);
+  const [estacionamentos, setEstacionamentos] = useState<EstacionamentoType[]>(
+    []
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchEstacionamentos = async () => {
     setLoading(true);
     try {
-      const response = await api.get('/estacionamentos/');
+      const response = await api.get("/estacionamentos/");
       setEstacionamentos(response.data);
     } catch (error) {
       console.error("Erro ao buscar estacionamentos:", error);
@@ -40,20 +42,20 @@ export function EstacionamentoPage() {
     handleCloseModal();
     fetchEstacionamentos();
   };
-  
+
   if (loading) {
     return <div>Carregando...</div>;
   }
 
   return (
     <div className="container-estacionamento">
-      <EstacionamentoList 
-        estacionamentos={estacionamentos} 
-        onAddClick={handleOpenModal} 
+      <EstacionamentoList
+        estacionamentos={estacionamentos}
+        onAddClick={handleOpenModal}
       />
-      
+
       {isModalOpen && (
-        <EstacionamentoForm 
+        <EstacionamentoForm
           onClose={handleCloseModal}
           onSuccess={handleFormSuccess}
         />
