@@ -1,4 +1,4 @@
-import './topbar.css';
+import "./topbar.css";
 
 interface TopBarProps {
   title: string;
@@ -9,7 +9,10 @@ export function TopBar({ title, onMenuClick }: TopBarProps) {
   return (
     <header className="top-bar">
       <div className="top-bar-left">
-        <button className="menu-button" onClick={onMenuClick}>☰</button> {/* Adicionado o manipulador onClick */}
+        <button className="menu-button" onClick={onMenuClick}>
+          ☰
+        </button>{" "}
+        {/* Adicionado o manipulador onClick */}
         <h1 className="page-title">{title}</h1>
       </div>
       <div className="top-bar-right">
