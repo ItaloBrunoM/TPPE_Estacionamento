@@ -1,4 +1,4 @@
-REATE TYPE tipo_acesso AS ENUM ('por_tempo', 'diaria', 'evento', 'mensalista');
+CREATE TYPE tipo_acesso AS ENUM ('por_tempo', 'diaria', 'evento', 'mensalista');
 CREATE TYPE user_role AS ENUM ('admin', 'funcionario');
 
 CREATE TABLE estacionamento (
