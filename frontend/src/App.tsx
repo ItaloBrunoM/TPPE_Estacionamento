@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { EstacionamentoPage } from './pages/EstacionamentoPage';
+import { Sidebar } from './components/sidebar.tsx';
 import './App.css';
 
 function Dashboard() {
@@ -16,16 +17,18 @@ function Dashboard() {
 }
 
 function App() {
+  const loggedUser = {
+    name: "Italo Bruno",
+    role: "Administrador"
+  };
+
   return (
     <Router>
       <div className="app-container" style={{ display: 'flex' }}>
-        <nav className="sidebar" style={{ width: '250px', background: '#2c3e50', color: 'white', padding: '20px' }}>
-          <div className="sidebar-header" style={{ marginBottom: '30px' }}>ESTACIONAMENTO TOP</div>
-          <Link to="/" style={{ color: 'white', display: 'block', marginBottom: '10px' }}>VISÃO GERAL</Link>
-          <Link to="/estacionamentos" style={{ color: 'white', display: 'block', marginBottom: '10px' }}>ESTACIONAMENTO</Link>
-        </nav>
-
+        {/* 3. Substituímos a <nav> antiga pelo componente <Sidebar> */}
+        <Sidebar userName={loggedUser.name} userRole={loggedUser.role} />
         <main className="main-content" style={{ flex: 1, padding: '20px' }}>
+          {/* O conteúdo principal e as rotas permanecem os mesmos */}
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/estacionamentos" element={<EstacionamentoPage />} />
