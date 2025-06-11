@@ -2,13 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: 60px; /* Mantenha a altura definida */
     padding: 0 24px;
     background-color: #2B3545;
     border-bottom: 1px solid #dfe4ea;
     box-sizing: border-box;
-    width: 100%;
+    width: 100%; /* Ocupa 100% da largura da viewport */
     color: #ffffff;
+    
+    /* Adicionadas propriedades para fixar a TopBar */
+    position: fixed; /* Fixa a barra no topo da viewport */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
 }
   
 .top-bar-left, .top-bar-right {

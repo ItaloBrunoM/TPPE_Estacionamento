@@ -36,16 +36,17 @@ function PageLayout() {
   };
 
   return (
-    <div className="app-layout">
-      <Sidebar 
-        userName={loggedUser.name} 
-        userRole={loggedUser.role} 
-        isVisible={isSidebarVisible} 
-      />
-      <div className="main-container">
-        <TopBar title={currentPageTitle} onMenuClick={toggleSidebar} /> {/* Nome do componente corrigido e onMenuClick passado */}
-        <main className="content-area">
-          <Routes>
+    <div className="app-container"> 
+      <TopBar title={currentPageTitle} onMenuClick={toggleSidebar} />
+      
+      <div className="content-wrapper">
+        <Sidebar 
+          userName={loggedUser.name} 
+          userRole={loggedUser.role} 
+          isVisible={isSidebarVisible} 
+        />
+        <main className={`content-area ${isSidebarVisible ? 'content-area-shifted' : ''}`}> 
+        <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/estacionamentos" element={<EstacionamentoPage />} />
           </Routes>

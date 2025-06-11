@@ -1,5 +1,10 @@
-body {
+html, body {
+  height: 100%;
   margin: 0;
+  overflow: hidden;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -8,20 +13,29 @@ body {
   background-color: #5375A7;
 }
 
-.app-layout {
-  display: flex;
-}
-
-.main-container {
+.app-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .content-area {
   padding: 24px;
   flex-grow: 1;
   background-color: #5375A7;
+  overflow-y: auto;
+  padding-top: calc(60px + 24px);
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content-area-shifted {
+  margin-left: 250px;
 }
 
 .mensagem {
