@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
 import api from "../components/api";
-
-// Componentes de UI
 import { EstacionamentoList } from "../components/EstacionamentoList";
 import { EstacionamentoForm } from "../components/EstacionamentoForm";
 import { EstacionamentoEditForm } from "../components/EstacionamentoEditForm";
-
-// Modais de Feedback
 import { ConfirmModal } from "../components/ConfirmModal";
 import ModalAtualiza from "../components/ModalAtualiza";
 
-
-// A interface continua a mesma
 export interface EstacionamentoType {
   id: number;
   nome: string;
@@ -23,28 +17,19 @@ export interface EstacionamentoType {
 }
 
 export function EstacionamentoPage() {
-  // --- ESTADOS PRINCIPAIS ---
   const [loading, setLoading] = useState(true);
-  const [estacionamentos, setEstacionamentos] = useState<EstacionamentoType[]>([]);
-  
-  // --- ESTADOS DE CONTROLE DOS MODAIS ---
-  // Modal de Criação
+  const [estacionamentos, setEstacionamentos] = useState<EstacionamentoType[]>(
+    []
+  );
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  
-  // Modal de Edição
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [estacionamentoToEdit, setEstacionamentoToEdit] = useState<EstacionamentoType | null>(null);
-
-  // Modal de Confirmação de Exclusão (Lógica agora centralizada aqui!)
+  const [estacionamentoToEdit, setEstacionamentoToEdit] =
+    useState<EstacionamentoType | null>(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [estacionamentoToDelete, setEstacionamentoToDelete] = useState<EstacionamentoType | null>(null);
-
-  // Modal de Notificação de Sucesso (o nosso ModalAtualiza!)
+  const [estacionamentoToDelete, setEstacionamentoToDelete] =
+    useState<EstacionamentoType | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-  // --- FUNÇÕES DE DADOS ---
   const fetchEstacionamentos = async () => {
-    // A busca inicial de dados continua a mesma
     setLoading(true);
     try {
       const response = await api.get("/estacionamentos/");
@@ -56,14 +41,10 @@ export function EstacionamentoPage() {
     }
   };
 
-  // Busca os dados quando o componente é montado
   useEffect(() => {
     fetchEstacionamentos();
   }, []);
 
-  // --- FUNÇÕES DE CALLBACK (Ações do Usuário) ---
-
-  // Função genérica para exibir o modal de sucesso e escondê-lo após 5s
   const showSuccessMessage = (message: string) => {
     setSuccessMessage(message);
     setTimeout(() => {
@@ -71,34 +52,32 @@ export function EstacionamentoPage() {
     }, 5000);
   };
 
-  // Ação: Sucesso na CRIAÇÃO
   const handleCreateSuccess = () => {
-    setIsCreateModalOpen(false); // Fecha o modal de criação
+    setIsCreateModalOpen(false);
     fetchEstacionamentos();
     showSuccessMessage("Novo estacionamento criado com sucesso!");
   };
 
-  // Ação: Sucesso na EDIÇÃO
   const handleEditSuccess = (nome: string) => {
-    setIsEditModalOpen(false); // Fecha o modal de edição
+    setIsEditModalOpen(false);
     setEstacionamentoToEdit(null);
     fetchEstacionamentos();
     showSuccessMessage(`Estacionamento "${nome}" atualizado com sucesso!`);
   };
 
-  // Ação: Usuário clicou no ícone de lixeira na lista
   const handleDeleteRequest = (estacionamento: EstacionamentoType) => {
     setEstacionamentoToDelete(estacionamento);
-    setIsConfirmModalOpen(true); // Abre o modal de confirmação
+    setIsConfirmModalOpen(true);
   };
 
-  // Ação: Usuário confirmou a exclusão no modal de confirmação
   const handleConfirmDelete = async () => {
     if (estacionamentoToDelete) {
       try {
         await api.delete(`/estacionamentos/${estacionamentoToDelete.id}`);
         fetchEstacionamentos();
-        showSuccessMessage(`Estacionamento "${estacionamentoToDelete.nome}" foi excluído.`);
+        showSuccessMessage(
+          `Estacionamento "${estacionamentoToDelete.nome}" foi excluído.`
+        );
       } catch (error) {
         console.error("Erro ao deletar estacionamento:", error);
       } finally {
@@ -107,15 +86,13 @@ export function EstacionamentoPage() {
       }
     }
   };
-  
+
   if (loading) {
     return <div>Carregando...</div>;
   }
 
-  // --- RENDERIZAÇÃO ---
   return (
     <div className="container-estacionamento">
-      {/* 1. Componente de Lista, agora mais "burro", apenas emitindo eventos */}
       <EstacionamentoList
         estacionamentos={estacionamentos}
         onAddClick={() => setIsCreateModalOpen(true)}
@@ -125,8 +102,6 @@ export function EstacionamentoPage() {
         }}
         onDeleteItemClick={handleDeleteRequest}
       />
-
-      {/* 2. Modal de Criação, que chama seu callback específico de sucesso */}
       {isCreateModalOpen && (
         <EstacionamentoForm
           onClose={() => setIsCreateModalOpen(false)}
@@ -134,7 +109,6 @@ export function EstacionamentoPage() {
         />
       )}
 
-      {/* 3. Modal de Edição, que chama seu callback específico de sucesso */}
       {isEditModalOpen && estacionamentoToEdit && (
         <EstacionamentoEditForm
           estacionamento={estacionamentoToEdit}
@@ -143,7 +117,6 @@ export function EstacionamentoPage() {
         />
       )}
 
-      {/* 4. Modal de Confirmação de Exclusão, controlado pela página */}
       {isConfirmModalOpen && estacionamentoToDelete && (
         <ConfirmModal
           message={`Tem certeza que deseja excluir o estacionamento "${estacionamentoToDelete.nome}"?`}
@@ -151,8 +124,7 @@ export function EstacionamentoPage() {
           onCancel={() => setIsConfirmModalOpen(false)}
         />
       )}
-      
-      {/* 5. Modal de Notificação de Sucesso, controlado pela página */}
+
       {successMessage && (
         <ModalAtualiza
           message={successMessage}
