@@ -1,51 +1,51 @@
 .success-popup {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    background-color: #3498db;
-    color: white;
-    padding: 15px 40px 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    z-index: 1001;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 300px;
-    animation: slideInFromRight 0.4s ease-out;
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background-color: #3498db;
+  color: white;
+  padding: 15px 40px 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  animation: slideInFromRight 0.4s ease-out;
+}
+
+.success-popup p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.success-popup .close-btn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.success-popup .close-btn:hover {
+  opacity: 0.8;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
-  
-  .success-popup p {
-    margin: 0;
-    font-weight: 500;
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  .success-popup .close-btn {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-  }
-  
-  .success-popup .close-btn:hover {
-    opacity: 0.8;
-  }
-  
-  @keyframes slideInFromRight {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
+}

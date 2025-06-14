@@ -1,5 +1,5 @@
-import React from 'react';
-import './ModalAtualiza.css';
+import React from "react";
+import "./ModalAtualiza.css";
 
 interface ModalAtualizaProps {
   message: string;
