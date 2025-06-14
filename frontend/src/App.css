@@ -44,7 +44,7 @@ body {
 }
 
 .content-area {
-  padding: 84px 0px 24px 24px;
+  padding: 50px;
   flex-grow: 1; /* Remova a linha 'flex-grow: 1;' duplicada se houver */
   background-color: #5375a7;
   overflow-y: auto;
