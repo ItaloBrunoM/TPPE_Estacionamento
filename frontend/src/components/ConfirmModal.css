@@ -1,59 +1,61 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: #3b5784;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 400px;
-    width: 90%; 
-    color: #e0e0e0;
-  }
-  
-  .modal-content p {
-    margin-bottom: 25px;
-    font-size: 1.1em;
-    font-weight: 500;
-  }
-  
-  .modal-actions button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 0 10px;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-  }
-  
-  .modal-actions .btn-confirm {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .modal-actions .btn-confirm:hover {
-    background-color: #c82333;
-    transform: translateY(-1px);
-  }
-  
-  .modal-actions .btn-cancel {
-    background-color: #6c757d;
-    color: white;
-  }
-  
-  .modal-actions .btn-cancel:hover {
-    background-color: #5a6268;
-    transform: translateY(-1px);
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #3b5784;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  color: #e0e0e0;
+}
+
+.modal-content p {
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0 10px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.modal-actions .btn-confirm {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-actions .btn-confirm:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.modal-actions .btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-actions .btn-cancel:hover {
+  background-color: #5a6268;
+  transform: translateY(-1px);
+}
