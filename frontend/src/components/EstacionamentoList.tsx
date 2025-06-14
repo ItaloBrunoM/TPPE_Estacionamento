@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { EstacionamentoType } from "../pages/EstacionamentoPage";
 import "./EstacionamentoList.css";
-import { ConfirmModal } from './ConfirmModal'; // Importar o ConfirmModal
-import api from '../components/api'; // Importar a instância da API
+import { ConfirmModal } from './ConfirmModal';
+import api from '../components/api';
 
 interface EstacionamentoListProps {
   estacionamentos: EstacionamentoType[];
   onAddClick: () => void;
-  onDeleteSuccess: () => void; // Adicionar prop para recarregar a lista
+  onDeleteSuccess: () => void;
+  onEditClick: (estacionamento: EstacionamentoType) => void;
 }
 
 export function EstacionamentoList({
   estacionamentos,
   onAddClick,
   onDeleteSuccess,
+  onEditClick,
 }: EstacionamentoListProps) {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [estacionamentoToDeleteId, setEstacionamentoToDeleteId] = useState<number | null>(null);
@@ -67,7 +69,7 @@ export function EstacionamentoList({
           >
             <span className="item-name">{est.nome}</span>
             <div className="item-actions">
-              <button className="icon-btn">✏️</button>
+              <button className="icon-btn" onClick={() => onEditClick(est)}>✏️</button>
               <button className="icon-btn" onClick={() => handleDeleteClick(est.id)}>🗑️</button>
             </div>
           </div>

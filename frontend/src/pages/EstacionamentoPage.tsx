@@ -1,8 +1,8 @@
-// src/pages/EstacionamentoPage.tsx
 import { useState, useEffect } from "react";
 import api from "../components/api";
 import { EstacionamentoList } from "../components/EstacionamentoList";
 import { EstacionamentoForm } from "../components/EstacionamentoForm";
+import { EstacionamentoEditForm } from "../components/EstacionamentoEditForm";
 
 export interface EstacionamentoType {
   id: number;
@@ -18,7 +18,10 @@ export function EstacionamentoPage() {
   const [estacionamentos, setEstacionamentos] = useState<EstacionamentoType[]>(
     []
   );
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [estacionamentoToEdit, setEstacionamentoToEdit] =
+    useState<EstacionamentoType | null>(null);
   const [loading, setLoading] = useState(true);
 
   const fetchEstacionamentos = async () => {
@@ -36,11 +39,19 @@ export function EstacionamentoPage() {
     fetchEstacionamentos();
   }, []);
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-
+  const handleOpenCreateModal = () => setIsCreateModalOpen(true);
+  const handleCloseCreateModal = () => setIsCreateModalOpen(false);
+  const handleOpenEditModal = (estacionamento: EstacionamentoType) => {
+    setEstacionamentoToEdit(estacionamento);
+    setIsEditModalOpen(true);
+  };
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
+    setEstacionamentoToEdit(null);
+  };
   const handleFormSuccess = () => {
-    handleCloseModal();
+    handleCloseCreateModal();
+    handleCloseEditModal();
     fetchEstacionamentos();
   };
 
@@ -52,13 +63,22 @@ export function EstacionamentoPage() {
     <div className="container-estacionamento">
       <EstacionamentoList
         estacionamentos={estacionamentos}
-        onAddClick={handleOpenModal}
+        onAddClick={handleOpenCreateModal}
         onDeleteSuccess={fetchEstacionamentos}
+        onEditClick={handleOpenEditModal}
       />
 
-      {isModalOpen && (
+      {isCreateModalOpen && (
         <EstacionamentoForm
-          onClose={handleCloseModal}
+          onClose={handleCloseCreateModal}
+          onSuccess={handleFormSuccess}
+        />
+      )}
+
+      {isEditModalOpen && estacionamentoToEdit && (
+        <EstacionamentoEditForm
+          estacionamento={estacionamentoToEdit}
+          onClose={handleCloseEditModal}
           onSuccess={handleFormSuccess}
         />
       )}
