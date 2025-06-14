@@ -12,7 +12,6 @@ export function TopBar({ title, onMenuClick }: TopBarProps) {
         <button className="menu-button" onClick={onMenuClick}>
           ☰
         </button>{" "}
-        {/* Adicionado o manipulador onClick */}
         <h1 className="page-title">{title}</h1>
       </div>
       <div className="top-bar-right">
