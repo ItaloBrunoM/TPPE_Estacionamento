@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import api from "./api";
 import "./EstacionamentoForm.css";
-
 import { EstacionamentoType } from '../pages/EstacionamentoPage';
 
 interface EstacionamentoEditFormProps {
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (nome: string) => void; 
   estacionamento: EstacionamentoType;
 }
 
@@ -56,8 +55,7 @@ export function EstacionamentoEditForm({
 
     try {
       await api.put(`/estacionamentos/${estacionamento.id}`, data);
-      onSuccess();
-      alert("Estacionamento atualizado com sucesso!");
+      onSuccess(data.nome);
     } catch (err) {
       setError("Erro ao atualizar o estacionamento. Tente novamente.");
       console.error(err);
@@ -69,7 +67,7 @@ export function EstacionamentoEditForm({
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Editar Estacionamento</h2> {/* Título para edição */}
+        <h2>Editar Estacionamento</h2>
         <form onSubmit={handleSubmit}>
           <label htmlFor="nome">Nome do Estacionamento</label>
           <input
@@ -141,7 +139,7 @@ export function EstacionamentoEditForm({
               disabled={isSubmitting}
               className="btn-salvar"
             >
-              {isSubmitting ? "Atualizando..." : "Atualizar"} {/* Texto do botão */}
+              {isSubmitting ? "Atualizando..." : "Atualizar"}
             </button>
           </div>
         </form>
