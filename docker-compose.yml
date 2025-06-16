@@ -6,30 +6,29 @@ services:
     container_name: estacionamento_db
     ports:
       - "5432:5432"
-    env_file: .env
+    env_file: .env # Este .env deve estar na raiz do projeto orquestrador
     environment:
-      POSTGRES_USER: ${DB_USER}   
+      POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./database:/docker-entrypoint-initdb.d
+      - ./workspace/tppe-database:/docker-entrypoint-initdb.d
     networks:
       - backend_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${DB_USER} -d $${DB_NAME}"]     
+      test: ["CMD-SHELL", "pg_isready -U $${DB_USER} -d $${DB_NAME}"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   backend:
-    build: ./backend
+    build: ./workspace/TPPE-Estacionamento
     env_file: .env
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
-      - /app/__pycache__
+      - ./workspace/TPPE-Estacionamento/src:/app/src
     depends_on:
       db:
         condition: service_healthy
@@ -42,18 +41,16 @@ services:
       retries: 5
 
   frontend:
-      build:
-        context: ./frontend
-        args:
-          - VITE_API_URL=http://localhost:8000/api
-      ports:
-        - "3000:80" 
-      env_file:
-        - ./frontend/.env.production
-      depends_on:
-        - backend
-      networks:
-        - backend_network
+    build:
+      context: ./workspace/tppe-frontend
+      args:
+        - VITE_API_URL=http://localhost:8000/api
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - backend_network
 
 volumes:
   pg_data:

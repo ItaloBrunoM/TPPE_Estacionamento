@@ -25,6 +25,7 @@ Sistema de gerenciamento de estacionamento com API em FastAPI, banco de dados Po
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
+- Make
 
 ---
 
@@ -32,15 +33,27 @@ Sistema de gerenciamento de estacionamento com API em FastAPI, banco de dados Po
 
 1. **Clone o repositório**  
    ```bash
-   git clone https://github.com/SeuUsuario/TPPE_Estacionamento.git
-   cd TPPE_Estacionamento
+    git clone <URL_DO_SEU_REPOSITORIO_GERAL>
+    cd <nome-da-pasta-clonada>
 
-2. **Construa e inicie os containers**
+2. **Configure o Ambiente**
 
     ```bash
-    docker-compose up --build
+    make setup
 
-3. **Acesse a aplicação:**
+3. **Inicie a Aplicação**
+
+    ```bash
+    make up
+
+4. **Acessando a Aplicação**
 
 * Frontend: http://localhost:3000
 * Backend (API): http://localhost:8000
+
+**Comandos Adicionais**
+
+* make down: Para todos os serviços.
+* make logs: Mostra os logs do backend em tempo real.
+* make clean: Apaga a pasta workspace com os repositórios clonados.
+* make help: Mostra todos os comandos disponíveis.*
