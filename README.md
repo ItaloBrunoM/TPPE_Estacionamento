@@ -5,6 +5,11 @@ Sistema de gerenciamento de estacionamento com API em FastAPI, banco de dados Po
 ## Repositório anterior
 [Trabalho de OO](https://github.com/ItaloBrunoM/OO_trabalho)
 
+## Outros Repositórios
+[Backend](https://github.com/ItaloBrunoM/tppe-estacionamento-backend)
+[Frontend](https://github.com/ItaloBrunoM/tppe-estacionamento-front)
+[Database](https://github.com/ItaloBrunoM/tppe-estacionamento-database)
+
 ---
 
 ## Diagrama UML de classe do projeto

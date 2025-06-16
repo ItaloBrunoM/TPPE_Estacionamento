@@ -2,7 +2,7 @@ BACKEND_REPO_URL := https://github.com/ItaloBrunoM/tppe-estacionamento-backend.g
 FRONTEND_REPO_URL := https://github.com/ItaloBrunoM/tppe-estacionamento-front.git
 DATABASE_REPO_URL := https://github.com/ItaloBrunoM/tppe-estacionamento-database.git
 
-BACKEND_DIR := $(WORKSPACE_DIR)/TPPE-Estacionamento
+BACKEND_DIR := $(WORKSPACE_DIR)/tpep-backend
 FRONTEND_DIR := $(WORKSPACE_DIR)/tppe-frontend
 DATABASE_DIR := $(WORKSPACE_DIR)/tppe-database
 
