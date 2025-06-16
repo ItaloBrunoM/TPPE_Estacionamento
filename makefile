@@ -2,7 +2,7 @@ BACKEND_REPO_URL := https://github.com/ItaloBrunoM/tppe-estacionamento-backend.g
 FRONTEND_REPO_URL := https://github.com/ItaloBrunoM/tppe-estacionamento-front.git
 DATABASE_REPO_URL := https://github.com/ItaloBrunoM/tppe-estacionamento-database.git
 
-BACKEND_DIR := $(WORKSPACE_DIR)/tpep-backend
+BACKEND_DIR := $(WORKSPACE_DIR)/tppe-backend
 FRONTEND_DIR := $(WORKSPACE_DIR)/tppe-frontend
 DATABASE_DIR := $(WORKSPACE_DIR)/tppe-database
 
@@ -16,7 +16,7 @@ setup: ## Cria a pasta 'workspace' e clona todos os repositórios dentro dela
 ifeq ($(OS),Windows_NT)
 	@if not exist workspace mkdir workspace
 	@echo "--- Clonando repositório do Backend..."
-	git clone $(BACKEND_REPO_URL) workspace\TPPE-Estacionamento
+	git clone $(BACKEND_REPO_URL) workspace\tppe-backend
 	@echo "--- Clonando repositório do Frontend..."
 	git clone $(FRONTEND_REPO_URL) workspace\tppe-frontend
 	@echo "--- Clonando repositório do Banco de Dados..."
@@ -24,7 +24,7 @@ ifeq ($(OS),Windows_NT)
 else
 	@mkdir -p workspace
 	@echo "--- Clonando repositório do Backend..."
-	git clone $(BACKEND_REPO_URL) workspace/TPPE-Estacionamento
+	git clone $(BACKEND_REPO_URL) workspace/tppe-backend
 	@echo "--- Clonando repositório do Frontend..."
 	git clone $(FRONTEND_REPO_URL) workspace/tppe-frontend
 	@echo "--- Clonando repositório do Banco de Dados..."
