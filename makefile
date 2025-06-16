@@ -13,9 +13,9 @@ help: ## Mostra esta mensagem de ajuda
 
 setup: ## Cria o .env, a pasta 'workspace' e clona todos os repositórios (multiplataforma)
 	@echo "--- Criando arquivo de ambiente .env padrão..."
-	@echo "DB_USER=admin" > .env
-	@echo "DB_PASSWORD=admin123" >> .env
-	@echo "DB_NAME=estacionamento" >> .env
+	@echo DB_USER: admin > .env
+	@echo DB_PASSWORD: admin123 >> .env
+	@echo DB_NAME: estacionamento >> .env
 	@echo "--- Criando diretório de trabalho: workspace..."
 ifeq ($(OS),Windows_NT)
 	@if not exist workspace mkdir workspace
