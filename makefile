@@ -11,7 +11,11 @@ DATABASE_DIR := $(WORKSPACE_DIR)/tppe-database
 help: ## Mostra esta mensagem de ajuda
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-setup: ## Cria a pasta 'workspace' e clona todos os repositórios dentro dela
+setup: ## Cria o .env, a pasta 'workspace' e clona todos os repositórios (multiplataforma)
+	@echo "--- Criando arquivo de ambiente .env padrão..."
+	@echo "DB_USER=admin" > .env
+	@echo "DB_PASSWORD=admin123" >> .env
+	@echo "DB_NAME=estacionamento" >> .env
 	@echo "--- Criando diretório de trabalho: workspace..."
 ifeq ($(OS),Windows_NT)
 	@if not exist workspace mkdir workspace
@@ -44,11 +48,13 @@ logs: ## Mostra os logs do backend em tempo real
 	@echo "--- Mostrando logs do backend (pressione Ctrl+C para sair)..."
 	docker-compose logs -f backend
 
-clean: ## Remove a pasta 'workspace' para uma limpeza total
-	@echo "--- Removendo diretório de trabalho 'workspace'..."
+clean: ## Remove a pasta 'workspace' e o arquivo .env (multiplataforma)
+	@echo "--- Removendo diretório de trabalho e .env..."
 ifeq ($(OS),Windows_NT)
 	@if exist workspace rmdir /s /q workspace
+	@if exist .env del .env
 else
 	@rm -rf workspace
+	@rm -f .env
 endif
 	@echo "--- Limpeza completa."
