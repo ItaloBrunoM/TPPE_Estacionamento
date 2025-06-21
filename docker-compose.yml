@@ -13,7 +13,7 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./workspace/tppe-database:/docker-entrypoint-initdb.d
+      - ./workspace/tppe-database/scripts:/docker-entrypoint-initdb.d
     networks:
       - backend_network
     healthcheck:

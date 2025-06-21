@@ -13,9 +13,9 @@ help: ## Mostra esta mensagem de ajuda
 
 setup: ## Cria o .env, a pasta 'workspace' e clona todos os repositórios (multiplataforma)
 	@echo "--- Criando arquivo de ambiente .env padrão..."
-	@echo DB_USER= admin > .env
-	@echo DB_PASSWORD= admin123 >> .env
-	@echo DB_NAME= estacionamento >> .env
+	@echo DB_USER=admin > .env
+	@echo DB_PASSWORD=admin123 >> .env
+	@echo DB_NAME=estacionamento >> .env
 	@echo "--- Criando diretório de trabalho: workspace..."
 ifeq ($(OS),Windows_NT)
 	@if not exist workspace mkdir workspace
@@ -43,6 +43,10 @@ up: ## Inicia todos os serviços com Docker Compose
 down: ## Para todos os serviços
 	@echo "--- Parando todos os contêineres..."
 	docker-compose down
+
+remove:
+	@echo "--- Remover os contêineres e os volumes"
+	docker-compose down -v
 
 logs: ## Mostra os logs do backend em tempo real
 	@echo "--- Mostrando logs do backend (pressione Ctrl+C para sair)..."
