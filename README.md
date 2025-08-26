@@ -1,4 +1,4 @@
-# TPPE_Estacionamento
+# TPPE_Estacionamento Projeto ARKA PARK
 
 Sistema de gerenciamento de estacionamento com API em FastAPI, banco de dados PostgreSQL e interface web em React.
 
